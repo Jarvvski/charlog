@@ -62,6 +62,14 @@
         ],
         "admin": [
             "php artisan db:seed --class='AdminSeeder'"
+        ],
+        "osok": [
+            "@composer install",
+            "docker-compose up -d",
+            "php artisan migrate:install",
+            "php artisan migrate:fresh",
+            "php artisan db:seed",
+            "@composer admin"
         ]
     },
     "config": {
