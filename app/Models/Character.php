@@ -5,9 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ExperienceRecord as Record;
 use Illuminate\Support\Facades\DB;
+use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Support\Facades\Log;
 
 class Character extends Model
 {
+	use Sortable;
+
+	/**
+	 * The sortable attributes for this model.
+	 * 
+	 * @var string
+	 */
+	public $sortable = [
+		'name', 'race'
+	];
 
 	/**
 	 * The table associated with the model.
@@ -35,11 +47,14 @@ class Character extends Model
 		'experience'
 	];
 
+
+
 	/**
 	 * Default values
 	 */
 	const DEFAULT_HEALTH  = 25;
 	const DEFAULT_DICE    = 20;
+	const DEFAULT_TIER    = 1;
 	const HEALTH_PER_TIER = 10;
 
 	public function records()
@@ -58,6 +73,12 @@ class Character extends Model
 		$diceIndex = DB::table('dice_index')->where('experience_required', '<', $this->experience)
 				->orderBy('dice_sides', 'desc')
 				->first();
+
+		// TODO: This check could be better
+		if (!$diceIndex) {
+			return self::DEFAULT_TIER;
+		}
+
 		return $diceIndex->tier;
 	}
 
@@ -66,6 +87,12 @@ class Character extends Model
 		$diceIndex = DB::table('dice_index')->where('experience_required', '<', $this->experience)
 				->orderBy('dice_sides', 'desc')
 				->first();
+
+		// TODO: This check could be better
+		if (!$diceIndex) {
+			return self::DEFAULT_DICE;
+		}
+
 		return $diceIndex->dice_sides;
 	}
 
@@ -84,7 +111,7 @@ class Character extends Model
 		$experience = 0;
 
 		foreach ($this->records as $record) {
-			$experience = $experience + $record->ammount;
+			$experience = $experience + $record->amount;
 		}
 
 		return $experience + $this->starting_experience;

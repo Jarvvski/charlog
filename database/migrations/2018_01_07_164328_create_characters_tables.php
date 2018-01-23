@@ -27,8 +27,9 @@ class CreateCharactersTables extends Migration
 
             $table->engine = 'InnoDB';
             $table->bigIncrements('id')->unsigned();
+            $table->text('title');
             $table->mediumText('source');
-            $table->integer('ammount')->unsigned();
+            $table->integer('amount')->unsigned();
             $table->timestamps();
         });
 

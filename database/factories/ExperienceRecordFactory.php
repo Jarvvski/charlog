@@ -16,8 +16,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\ExperienceRecord::class, function (Faker $faker) { 
 
 	return [
-		'source' => $faker->paragraph,
-		'ammount' => $faker->numberBetween(50, 200),
+        'title' => $faker->sentence($faker->numberBetween(3,5)),
+		'source' => implode($faker->paragraphs($faker->numberBetween(2,6))),
+		'amount' => $faker->numberBetween(500, 6000),
 	];
 
 });

@@ -25,9 +25,8 @@
             height: 100vh;
         }
 
-        .flex-center {
+        .title-name {
             align-items: center;
-            display: flex;
             justify-content: center;
         }
 
@@ -47,6 +46,7 @@
 
         .title {
             font-size: 84px;
+            margin-top:;
         }
 
         .links > a {
@@ -65,7 +65,7 @@
     </style>
 </head>
 <body>
-    <div class="flex-center position-ref full-height">
+    <div class="title-name position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
                 @auth
@@ -73,7 +73,7 @@
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
-                        @endauth
+                    @endauth
             </div>
         @endif
 

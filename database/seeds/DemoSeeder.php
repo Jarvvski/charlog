@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\Character;
 
-class CharacterDemoSeed extends Seeder
+class DemoSeeder extends Seeder
 {
 	/**
 	 * Run the database seeds.
@@ -12,7 +12,7 @@ class CharacterDemoSeed extends Seeder
 	 */
 	public function run()
 	{
-		factory(App\Models\Character::class, 15)->create();
+		factory(App\Models\Character::class, 20)->create();
 
 
 		factory(App\Models\ExperienceRecord::class, 30)->create()->each(function ($r) {

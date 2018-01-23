@@ -7,3 +7,25 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+th > a,
+th > a:hover,
+th > a:active
+{
+    color: $text-color;
+    text-decoration: none;
+}
+
+.form-inline {
+    display: inline-block;
+}
+
+.hover-panel > h3,
+.hover-panel > h3:hover,
+.hover-panel > h3:active,
+.hover-panel > span,
+.hover-panel > span:hover,
+.hover-panel > span:active,
+{
+    text-decoration: none;
+}
