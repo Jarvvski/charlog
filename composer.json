@@ -67,6 +67,7 @@
             "./check-db"
         ],
         "osok": [
+            "composer install --optimize-autoloader",
             "npm install",
             "docker-compose up -d",
             "@composer check-db",
