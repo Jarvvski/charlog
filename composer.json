@@ -54,25 +54,31 @@
         ],
         "demo": [
             "@composer setup",
-            "php artisan db:seed --class='DemoSeeder'"
+            "php artisan db:seed --class='DemoSeeder' --env=local"
         ],
         "setup": [
-            "php artisan migrate:fresh",
-            "php artisan db:seed"
+            "php artisan migrate:fresh --env=local",
+            "php artisan db:seed --env=local"
         ],
         "admin": [
-            "php artisan db:seed --class='AdminSeeder'"
+            "php artisan db:seed --class='AdminSeeder' --env=local"
+        ],
+        "check-db": [
+            "./check-db"
         ],
         "osok": [
-            "@composer install --optimize-autoloader",
             "npm install",
             "docker-compose up -d",
-            "php artisan key:generate",
-            "php artisan migrate:install",
+            "@composer check-db",
+            "php artisan down",
+            "php artisan cache:clear",
+            "php artisan config:cache",
+            "php artisan key:generate --env=local",
+            "php artisan migrate:install --env=local",
             "@composer setup",
             "@composer admin",
-            "php artisan config:cache",
-            "npm run production"
+            "npm run production",
+            "php artisan up"
         ]
     },
     "config": {
