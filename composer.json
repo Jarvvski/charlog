@@ -66,6 +66,10 @@
         "check-db": [
             "./check-db"
         ],
+        "cc": [
+            "php artisan cache:clear",
+            "php artisan config:cache"
+        ],
         "osok": [
             "composer install --optimize-autoloader",
             "npm install",
