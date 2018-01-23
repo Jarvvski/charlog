@@ -64,12 +64,14 @@
             "php artisan db:seed --class='AdminSeeder'"
         ],
         "osok": [
-            "@composer install",
+            "@composer install --optimize-autoloader",
             "docker-compose up -d",
             "php artisan migrate:install",
             "php artisan migrate:fresh",
             "php artisan db:seed",
-            "@composer admin"
+            "@composer admin",
+            "php artisan config:cache",
+            "php artisan route:cache"
         ]
     },
     "config": {
