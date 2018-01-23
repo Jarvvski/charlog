@@ -65,13 +65,15 @@
         ],
         "osok": [
             "@composer install --optimize-autoloader",
+            "npm install",
             "docker-compose up -d",
             "php artisan migrate:install",
             "php artisan migrate:fresh",
             "php artisan db:seed",
             "@composer admin",
             "php artisan config:cache",
-            "php artisan route:cache"
+            "php artisan route:cache",
+            "npm run production"
         ]
     },
     "config": {
