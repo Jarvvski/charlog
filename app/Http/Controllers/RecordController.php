@@ -38,7 +38,7 @@ class RecordController extends Controller
 		$record = new Record;
 
 		$viewParams = [
-			'characters' => Character::all(),
+			'characters' => Character::orderBy('name', 'asc')->get(),
 			'record' => $record
 		];
 
@@ -146,7 +146,7 @@ class RecordController extends Controller
 		}
 
 		$viewParams = [
-			'characters' => Character::all(),
+			'characters' => Character::orderBy('name', 'asc')->get(),
 			'record' => $record,
 			'recChars' => $charArr
 		];
