@@ -1,6 +1,12 @@
 #!/bin/bash
-until mysql -u root -h 127.0.0.1 -P 33061 --password=secret -e 'SELECT 1' > /dev/null; do
-  >&2 echo "MySQL 127.0.0.1:33061 for user root is unavailable - sleeping"
+
+username=root
+password=secret
+
+# DO NOT EDIT PAST THIS LINE
+
+until mysql -u $username -h 127.0.0.1 -P 33061 --password=$password -e 'SELECT 1' > /dev/null; do
+  >&2 echo "MySQL 127.0.0.1:33061 is unavailable - sleeping"
   sleep 1
 done
 >&2 echo "MySQL 127.0.0.1:33061 is up"
