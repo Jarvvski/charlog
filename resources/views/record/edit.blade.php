@@ -10,14 +10,15 @@
 				<div class="panel-heading">Edit Character Record</div>
 				
 				<div class="panel-body">
+				{!! Form::open(['route' => ['record.update', $record->id]]) !!}					
 				<div class="form-group">
 					{!! Form::label('title', 'Record Title') !!}
-					{!! Form::text('title', '', ['class' => 'form-control']) !!}
+					{!! Form::text('title', $record->title , ['class' => 'form-control']) !!}
 					<span id="helpBlock" class="help-block">Event title</span>
 				</div>
 
 				
-				{!! Form::open(['route' => ['record.update', $record->id]]) !!}
+				
 				<div class="form-group">
 					{!! Form::label('amount', 'Awarding amount') !!}
 					{!! Form::number('amount', $record->amount, ['class' => 'form-control']) !!}

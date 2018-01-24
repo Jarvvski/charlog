@@ -70,7 +70,7 @@ class Character extends Model
 
 	public function getTierAttribute()
 	{
-		$diceIndex = DB::table('dice_index')->where('experience_required', '<', $this->experience)
+		$diceIndex = DB::table('dice_index')->where('experience_required', '<=', $this->experience)
 				->orderBy('dice_sides', 'desc')
 				->first();
 
@@ -84,7 +84,7 @@ class Character extends Model
 
 	public function getDiceAttribute()
 	{
-		$diceIndex = DB::table('dice_index')->where('experience_required', '<', $this->experience)
+		$diceIndex = DB::table('dice_index')->where('experience_required', '<=', $this->experience)
 				->orderBy('dice_sides', 'desc')
 				->first();
 

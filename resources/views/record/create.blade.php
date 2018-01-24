@@ -10,12 +10,15 @@
 				<div class="panel-heading">Create Character Record</div>
 				
 				<div class="panel-body">
+
+					{!! Form::open(['route' => ['record.save', $record->id]]) !!}
 					<div class="form-group">
 						{!! Form::label('title', 'Record Title') !!}
 						{!! Form::text('title', '', ['class' => 'form-control']) !!}
 						<span id="helpBlock" class="help-block">Event title</span>
 					</div>
-					{!! Form::open(['route' => ['record.save', $record->id]]) !!}
+
+					
 					<div class="form-group">
 						{!! Form::label('amount', 'Awarding amount') !!}
 						{!! Form::number('amount', '0', ['class' => 'form-control']) !!}

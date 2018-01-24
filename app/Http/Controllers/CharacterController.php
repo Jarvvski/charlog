@@ -66,6 +66,30 @@ class CharacterController extends Controller
 	}
 
 	/**
+	 * Update a resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Models\Character
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Character $character)
+	{
+		$character = Character::find($character->id);
+		
+		if (!$character) {
+			// throw err
+		}
+
+		$character->name = $request->input('name');
+		$character->race_id = $request->input('race_id');
+		$character->starting_experience = $request->input('starting_experience');
+		$character->save();
+
+		return redirect()->route('character.index')
+		->with('message', 'Character created');
+	}
+
+	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
