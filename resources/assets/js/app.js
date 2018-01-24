@@ -8,3 +8,13 @@
 require('./bootstrap.js');
 
 require('./delete-conf.js');
+
+$(function(){
+  $(".event-source").each(function(i){
+    len=$(this).text().length;
+    if(len>80)
+    {
+      $(this).text($(this).text().substr(0,80)+'...');
+    }
+  });
+});

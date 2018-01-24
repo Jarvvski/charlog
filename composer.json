@@ -68,17 +68,17 @@
         ],
         "cc": [
             "php artisan cache:clear",
-            "php artisan config:cache"
+            "php artisan config:clear"
         ],
         "osok": [
             "composer install --optimize-autoloader",
             "npm install",
+            "cp .env.example .env",
+            "php artisan key:generate --env=local",
             "docker-compose up -d",
             "@composer check-db",
             "php artisan down",
-            "php artisan cache:clear",
-            "php artisan config:cache",
-            "php artisan key:generate --env=local",
+            "@composer cc",
             "php artisan migrate:install --env=local",
             "@composer setup",
             "@composer admin",

@@ -31,14 +31,14 @@
 								<td>{{ $character->dice }}</td>
 								<td>{{ $character->health }}</td>
 								<td>{{ $character->experience }}</td>
-								<td>
-									<a href="{{ route('character.show', $character->id) }}" class="btn btn-success btn-xs" role="button"><i class="fas fa-inspect"></i></a>
+								<td class="text-center">
+									<a href="{{ route('character.show', $character->id) }}" class="btn btn-success btn-sm" role="button"><i class="fas fa-eye"></i></a>
 									@if (Auth::check())
-									<a href="{{ url('admin/character/'. $character->id . '/edit')}}" class="btn btn-primary btn-xs" role="button"><i class="fas fa-edit"></i></a>
+									<a href="{{ url('admin/character/'. $character->id . '/edit')}}" class="btn btn-primary btn-sm" role="button"><i class="fas fa-edit"></i></a>
 
 									{!! Form::model($character, ['method' => 'delete', 'route' => ['character.delete', $character->id], 'class' =>'form-inline form-delete']) !!}
 									{!! Form::hidden('id', $character->id) !!}
-									{!! Form::button('<i class="fas fa-trash" aria-hidden="true"></i>', ['class' => 'btn btn-xs btn-danger delete','type' => 'submit', 'name' => 'delete_modal','style'=>'display:inline-block']) !!}
+									{!! Form::button('<i class="fas fa-trash" aria-hidden="true"></i>', ['class' => 'btn btn-sm btn-danger delete','type' => 'submit', 'name' => 'delete_modal','style'=>'display:inline-block']) !!}
 									{!! Form::close() !!}
 									@endif
 								</td>

@@ -23,9 +23,9 @@
 						<tbody>
 							@foreach ($records as $record)
 							<tr>
-								<td>{{ $record->amount }}</td>
-								<td>{{ $record->title }}</td>
-								<td>
+								<td class="col-md-2 text-center">{{ $record->amount }}</td>
+								<td class="col-md-2">{{ $record->title }}</td>
+								<td class="col-md-2">
 									@foreach ($record->characters as $character)
 									@if($record->characters->last() === $character)
 									<span>{{ $character->name }}</span>
@@ -34,19 +34,18 @@
 									@endif
 									@endforeach
 								</td>
-								<td class="text-overflow">{{ $record->source }}</td>
-								<td>
-									<a href="{{ route('record.show', $record->id) }}" class="btn btn-success btn-xs" role="button"><i class="fas fa-inspect"></i></a>
-									@if (Auth::check())
-									<a href="{{ url('admin/record/'. $record->id . '/edit')}}" class="btn btn-primary btn-xs" role="button"><i class="fas fa-edit"></i></a>
+								<td class="col-md-4"><div class="event-source">{{ $record->source }}</div></td>
+								<td class="col-md-2 text-center">
+										<a href="{{ route('record.show', $record->id) }}" class="btn btn-success btn-sm" role="button"><i class="fas fa-eye"></i></a>
+										@if (Auth::check())
+										<a href="{{ url('admin/record/'. $record->id . '/edit')}}" class="btn btn-primary btn-sm" role="button"><i class="fas fa-edit"></i></a>
 
-									{!! Form::model($record, ['method' => 'delete', 'route' => ['record.delete', $record->id], 'class' =>'form-inline form-delete']) !!}
-									{!! Form::hidden('id', $record->id) !!}
-									{!! Form::button('<i class="fas fa-trash" aria-hidden="true"></i>', ['class' => 'btn btn-xs btn-danger delete','type' => 'submit', 'name' => 'delete_modal','style'=>'display:inline-block']) !!}
-									{!! Form::close() !!}
-									@endif
+										{!! Form::model($record, ['method' => 'delete', 'route' => ['record.delete', $record->id], 'class' =>'form-inline form-delete']) !!}
+										{!! Form::hidden('id', $record->id) !!}
+										{!! Form::button('<i class="fas fa-trash" aria-hidden="true"></i>', ['class' => 'btn btn-danger btn-sm delete','type' => 'submit', 'name' => 'delete_modal']) !!}
+										{!! Form::close() !!}
+										@endif
 								</td>
-								
 							</tr>
 							@endforeach
 						</tbody>
