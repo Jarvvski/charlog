@@ -27,7 +27,7 @@
 
 				<div class="form-group">
 					{!! Form::label('characters[]', 'Characters') !!}
-					<select multiple class="form-control" name="characters[]">
+					<select multiple class="form-control" size=15 name="characters[]">
 						<option value="" disabled>Select Characters...</option>
 						@foreach($characters as $character)
 							@if(in_array($character->id, $recChars))
