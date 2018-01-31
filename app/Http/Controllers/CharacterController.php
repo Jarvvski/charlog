@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Character;
 use App\Models\Race;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCharacter;
 use Illuminate\Support\Facades\Log;
 
 class CharacterController extends Controller
@@ -92,10 +93,10 @@ class CharacterController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  StoreCharacter  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function save(Request $request)
+	public function save(StoreCharacter $request)
 	{
 		$character = new Character;
 		$character->name = $request->input('name');

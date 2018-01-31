@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ExperienceRecord as Record;
 use App\Models\Character;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreRecord;
 use Illuminate\Support\Facades\Log;
 
 class RecordController extends Controller
@@ -69,11 +70,11 @@ class RecordController extends Controller
 	/**
 	 * Update a resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\Models\ExperienceRecord
+	 * @param  App\Http\Requests\StoreRecord $request
+	 * @param  App\Models\ExperienceRecord
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Record $record)
+	public function update(StoreRecord $request, Record $record)
 	{
 		$record = Record::find($record->id);
 		
@@ -104,10 +105,10 @@ class RecordController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  App\Http\Requests\StoreRecord $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function save(Request $request)
+	public function save(StoreRecord $request)
 	{
 		// creating record
 		$record = new Record;
