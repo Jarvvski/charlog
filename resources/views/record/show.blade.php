@@ -12,6 +12,9 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-body">
+					@if($record->record_date)
+					<h2>{{ $record->formattedDate('l \t\h\e jS \of F, Y') }}</h2>
+					@endif
 					<p>
 						{{ $record->source }}
 					</p>

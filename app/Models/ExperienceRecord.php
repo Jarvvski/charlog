@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class ExperienceRecord extends Model
 {
@@ -38,5 +39,14 @@ class ExperienceRecord extends Model
 	{
 		return $this->belongsToMany('App\Models\Character')
 			->using('App\Models\CharacterExperienceRecord');
+	}
+
+	public function formattedDate($format = null)
+	{	
+		if (!$format) {
+	    	return Carbon::parse($this->record_date)->format('m/d/Y');
+		} else {
+			return Carbon::parse($this->record_date)->format($format);
+		}
 	}
 }

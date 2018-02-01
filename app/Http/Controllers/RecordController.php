@@ -7,6 +7,7 @@ use App\Models\Character;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRecord;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class RecordController extends Controller
 {
@@ -91,6 +92,8 @@ class RecordController extends Controller
 		Log::info($request->input('characters'));
 		$characters = Character::find($request->input('characters'));
 
+		$record->record_date = Carbon::parse($request->input('date'));
+
 		$record->title  = $request->input('title');
 		$record->source = $request->input('source');
 		$record->amount = $request->input('amount');
@@ -116,6 +119,8 @@ class RecordController extends Controller
 		Log::info('creating new record');
 		// get assigned characters, and associate
 		$characters = Character::find($request->input('characters'));
+
+		$record->record_date = Carbon::parse($request->input('date'));
 
 		$record->title  = $request->input('title');
 		$record->source = $request->input('source');

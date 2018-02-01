@@ -2,6 +2,10 @@
 
 @section('title', 'create record')
 
+@section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.standalone.min.css">
+@endsection
+
 @section('content')
 <div class="container">
 	<div class="row">
@@ -27,11 +31,31 @@
 						@else
 							<div class="form-group">
 								{!! Form::label('title', 'Record Title') !!}
-								{!! Form::text('title', '', ['class' => 'form-control']) !!}
+								{!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
 								<span id="helpBlock" class="help-block">Event title</span>
 							</div>
 						@endif
 						<!-- record title end -->
+
+						<!-- record date begin -->
+						@if ($errors->get('date'))
+							<div class="form-group has-error has-feedback">
+								<label for="date" class="control-label">Record date</label>
+								<div class="input-group date">
+									<input name="date" type="text" class="form-control" value="{{ old('date') }}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								</div>
+								<span id="helpBlock" class="help-block">Record date</span>
+							</div>
+						@else
+							<div class="form-group">
+								<label for="date" class="control-label">Record date</label>
+								<div class="input-group date">
+									<input name="date" type="text" class="form-control" value="{{ old('date') }}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								</div>
+								<span id="helpBlock" class="help-block">Record date</span>
+							</div>
+						@endif
+						<!-- record date end -->
 						
 						<!-- record exp begin -->
 						@if ($errors->get('amount'))
@@ -45,7 +69,7 @@
 						@else
 							<div class="form-group">
 								{!! Form::label('amount', 'Awarding amount') !!}
-								{!! Form::number('amount', '', ['class' => 'form-control']) !!}
+								{!! Form::number('amount', old('amount') , ['class' => 'form-control']) !!}
 								<span id="helpBlock" class="help-block">Experience to award</span>
 							</div>
 						@endif
@@ -60,9 +84,13 @@
 										<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
 										<span id="charErrorStatus" class="sr-only"></span>
 									</option>
-									@foreach(old('characters') as $character)
-										@if(in_array($character->id, $recChars))
-										<option selected="" value="{{ $character->id }}">{{$character->name}}</option>
+									@foreach($characters as $character)
+										@if(old('characters'))
+											@if(in_array($character->id, old('characters')))
+												<option selected="" value="{{ $character->id }}">{{$character->name}}</option>
+											@else
+												<option value="{{ $character->id }}">{{$character->name}}</option>
+											@endif
 										@else
 											<option value="{{ $character->id }}">{{$character->name}}</option>
 										@endif
@@ -76,7 +104,15 @@
 								<select multiple class="form-control" size=15 name="characters[]">
 									<option value="" selected disabled>Select Characters...</option>
 									@foreach($characters as $character)
-									<option value="{{ $character->id }}">{{$character->name}}</option>
+										@if(old('characters'))
+											@if(in_array($character->id, old('characters')))
+												<option selected="" value="{{ $character->id }}">{{$character->name}}</option>
+											@else
+												<option value="{{ $character->id }}">{{$character->name}}</option>
+											@endif
+										@else
+											<option value="{{ $character->id }}">{{$character->name}}</option>
+										@endif
 									@endforeach
 								</select>
 								<span id="helpBlock" class="help-block">Characters associated with record. Hold CTRL + click | shift + click to select multiple</span>
@@ -96,7 +132,7 @@
 						@else
 							<div class="form-group">
 								{!! Form::label('source', 'Source of XP') !!}
-								{!! Form::textArea('source', '', ['class' => 'form-control']) !!}
+								{!! Form::textArea('source', old('source'), ['class' => 'form-control']) !!}
 								<span id="helpBlock" class="help-block">Paragraph detailing event</span>
 							</div>
 						@endif
@@ -125,4 +161,15 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+$('.input-group.date').datepicker({
+	format: "mm/dd/yy",
+	todayBtn: "linked",
+	autoclose: true
+});
+</script>
 @endsection

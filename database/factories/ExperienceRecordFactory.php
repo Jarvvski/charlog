@@ -19,6 +19,7 @@ $factory->define(App\Models\ExperienceRecord::class, function (Faker $faker) {
         'title' => $faker->sentence($faker->numberBetween(3,5)),
 		'source' => implode($faker->paragraphs($faker->numberBetween(2,6))),
 		'amount' => $faker->numberBetween(500, 6000),
+        'record_date' => $faker->dateTime
 	];
 
 });

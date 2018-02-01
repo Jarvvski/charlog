@@ -27,6 +27,7 @@ class StoreRecord extends FormRequest
 		return [
 			'record_id' => 'unique:records',
 			'title' => 'required|max:255',
+			'date' => 'required|date',
 			'amount' => 'required|integer|min:0',
 			'characters.*' => 'required|integer',
 			'source' => 'required|string|max:16777215'
@@ -43,6 +44,8 @@ class StoreRecord extends FormRequest
 		return [
 			'title.required' => "A record title is required",
 			'title.max' => "Your record title is too long",
+			'date.required' => "A date is required",
+			'date.date' => "Incorect date format provided",
 			'amount.required' => "A record needs an exp value",
 			'amount.integer' => "Record exp must be an interger",
 			'amount.min' => "Record exp must be larger than 0",

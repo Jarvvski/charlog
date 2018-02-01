@@ -26,7 +26,7 @@ class StoreCharacter extends FormRequest
 	{
 		return [
 			'character_id' => 'unique:characters',
-			'name' => 'required|unique:characters|max:255',
+			'name' => 'required|max:255',
 			'race_id' => 'required|exists:races,id|integer',
 			'starting_experience' => 'required|integer|min:0',
 		];

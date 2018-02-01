@@ -69,11 +69,11 @@ class CharacterController extends Controller
 	/**
 	 * Update a resource in storage.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  StoreCharacter  $request
 	 * @param  \App\Models\Character
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Character $character)
+	public function update(StoreCharacter $request, Character $character)
 	{
 		$character = Character::find($character->id);
 		
