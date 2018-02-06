@@ -38,10 +38,15 @@ Route::post('admin/logout', 'Auth\LoginController@logout')->name('logout');
 
 // General Routes
 Route::get('/', 'CharacterController@index')->name('home');
+
 Route::get('/characters', 'CharacterController@index')->name('character.index');
 Route::get('/characters/{character}', 'CharacterController@show')->name('character.show');
+Route::get('/character/search', 'CharacterController@search')->name('character.search');
+
 Route::get('/records', 'RecordController@index')->name('record.index');
 Route::get('/record/{record}', 'RecordController@show')->name('record.show');
+Route::get('/test/something', 'RecordController@search')->name('record.search');
+
 Route::get('/races', 'RaceController@index')->name('race.index');
 
 // TODO: Finish race routes

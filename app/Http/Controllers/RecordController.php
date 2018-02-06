@@ -69,6 +69,43 @@ class RecordController extends Controller
 	}
 
 	/**
+	 * Search for resources.
+	 * 
+	 * @param  \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function search(Request $request)
+	{
+	    if ($request->ajax()) {
+	    	$output = "";
+	    	Log::info('recieved request for record '. $request->var);
+	    	$records = Record::search($request->var)->get();
+
+	    	if ($records) {
+	    		foreach($records as $record) {
+	    			$output .= '<tr>'.
+	    			'<td class="col-md-2 text-center">'.$record->amount.'</td>'.
+	    			'<td class="col-md-2">'.$record->title.'</td>';
+
+	    			$temp = "";
+	    			foreach($record->characters as $character) {
+	    				if($record->characters->last() === $character) {
+	    					$temp .= "<span>".$character->name."</span>";
+	    				} else {
+	    					$temp .= "<span>".$character->name."</span>, ";
+	    				}
+	    			}
+	    			$output .= "<td class='col-md-2'>${temp}</td>".
+	    			'<td class="col-md-4">'.$record->source.'</td>'.
+	    			'<td>'.$record->generateButtons().'</td>';
+	    		}
+
+	    		return Response($output);
+	    	}
+	    }
+	}
+
+	/**
 	 * Update a resource in storage.
 	 *
 	 * @param  App\Http\Requests\StoreRecord $request

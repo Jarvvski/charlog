@@ -12,12 +12,12 @@ th > a,
 th > a:hover,
 th > a:active
 {
-    color: $text-color;
-    text-decoration: none;
+	color: $text-color;
+	text-decoration: none;
 }
 
 .form-inline {
-    display: inline-block;
+	display: inline-block;
 }
 
 .hover-panel > h3,
@@ -27,5 +27,14 @@ th > a:active
 .hover-panel > span:hover,
 .hover-panel > span:active,
 {
-    text-decoration: none;
+	text-decoration: none;
+}
+
+input.search-box {
+	outline: none;
+	border: none !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	font-size: 1.5em;
 }

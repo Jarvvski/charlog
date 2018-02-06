@@ -4,6 +4,24 @@
 @include('components.modal')
 
 <div class="container">
+	
+	<!-- search box begin -->
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="form-group">
+						<div class="col-xs-12">
+							<input type="text" class="form-control search-box" id="search" placeholder="search...">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- search box end -->
+	
+	<!-- content box begin -->
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
@@ -22,7 +40,7 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="data">
 							@foreach ($characters as $character)
 							<tr>
 								<td>{{ $character->name }}</td>
@@ -54,9 +72,42 @@
 				@endif
 			</div>
 			<div class="text-center">
-						{!! $characters->appends(\Request::except('page'))->render() !!}
+				{!! $characters->appends(\Request::except('page'))->render() !!}
 			</div>
 		</div>
 	</div>
+	<!-- search box end -->
+
 </div>
+@endsection
+
+@section('scripts')
+<script>
+	$.ajaxSetup({
+    	headers: {
+        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    	}
+	});
+</script>
+<script>
+$('#search').on('keyup',function(){
+	
+	$value=$(this).val();
+	console.log($value);
+
+	$.ajax({
+		type : 'get',
+		url : '{{ route('character.search') }}',
+		data:{'var':$value},
+		success:function(data) {
+			$('#data').html(data);
+		},
+		 error: function (xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			console.log(err);
+		}
+	});
+
+});
+</script>
 @endsection

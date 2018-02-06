@@ -22,11 +22,11 @@ class CharacterController extends Controller
 		$characters = $character->sortable(['name' => 'asc'])->paginate(15);
 
 		$viewParams = [
-			'characters' => $characters
-		];
+		'characters' => $characters
+	];
 
-		return view('character.index', $viewParams);
-	}
+	return view('character.index', $viewParams);
+}
 
 	/**
 	 * Create a new resource.
@@ -38,12 +38,12 @@ class CharacterController extends Controller
 		$character = new Character;
 
 		$viewParams = [
-			'races' => Race::all(),
-			'character' => $character
-		];
+		'races' => Race::all(),
+		'character' => $character
+	];
 
-		return view('character.create', $viewParams);
-	}
+	return view('character.create', $viewParams);
+}
 
 	/**
 	 * Show a specific resource.
@@ -60,10 +60,44 @@ class CharacterController extends Controller
 		}
 
 		$viewParams = [
-			'character' => $character
-		];
+		'character' => $character
+	];
 
-		return view('character.show', $viewParams);
+	return view('character.show', $viewParams);
+}
+
+	/**
+	 * Search for resources.
+	 * 
+	 * @param  \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function search(Request $request)
+	{
+
+		
+		if ($request->ajax()) {
+			$output = "";
+			Log::info('recieved request for character '. $request->var);
+			$characters = Character::search($request->var)->get();
+
+			if ($characters) {
+				foreach($characters as $character) {
+					$output.='<tr>'.
+					'<td>'.$character->name.'</td>'.
+					'<td>'.$character->race->name.'</td>'.
+					'<td>'.$character->tier.'</td>'.
+					'<td>'.$character->dice.'</td>'.
+					'<td>'.$character->health.'</td>'.
+					'<td>'.$character->experience.'</td>'.
+					'<td>'.$character->generateButtons().'</td>'.
+					'</tr>';
+				}
+
+				return Response($output);
+			}
+
+		}
 	}
 
 	/**
@@ -123,12 +157,12 @@ class CharacterController extends Controller
 		}
 
 		$viewParams = [
-			'races' => Race::all(),
-			'character' => $character
-		];
+		'races' => Race::all(),
+		'character' => $character
+	];
 
-		return view('character.edit', $viewParams);
-	}
+	return view('character.edit', $viewParams);
+}
 
 	/**
 	 * Remove the specified resource from storage.

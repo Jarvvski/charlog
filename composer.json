@@ -12,7 +12,8 @@
         "laravel/tinker": "~1.0",
         "nesbot/carbon": "^1.22",
         "predis/predis": "^1.1",
-        "LaravelCollective/html": "5.5.*"
+        "LaravelCollective/html": "5.5.*",
+        "nicolaslopezj/searchable": "1.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
