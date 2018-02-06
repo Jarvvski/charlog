@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "jarvvski/charlog",
+    "description": "Character management",
+    "keywords": ["Web App", "laravel", "Characters"],
     "license": "MIT",
     "type": "project",
     "require": {
