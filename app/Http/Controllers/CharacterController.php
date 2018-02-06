@@ -53,7 +53,7 @@ class CharacterController extends Controller
 	 */
 	public function show(Character $character)
 	{
-		$character = character::find($character->id);
+		$character = Character::find($character->id);
 
 		if (!$character) {
 			// throw character does't exist

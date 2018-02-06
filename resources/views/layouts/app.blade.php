@@ -49,6 +49,9 @@
 						<li>
 							<a href="{{ route('record.index') }}">Records</a>
 						</li>
+						<li>
+							<a href="{{ route('race.index') }}">Races</a>
+						</li>
 						<!-- Authentication Links -->
 						@guest
 						<li><a href="{{ route('login') }}">Login</a></li>

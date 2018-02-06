@@ -20,7 +20,7 @@ Route::post('admin/logout', 'Auth\LoginController@logout')->name('logout');
 // STOP //
 //////////
 
-// TODO: This can't be allowed as an implimentation until permission system is in
+// TODO: This cannot be allowed as an implimentation until permission system is in
 
 // Registration Routes
 // Route::get('admin/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -48,9 +48,7 @@ Route::get('/record/{record}', 'RecordController@show')->name('record.show');
 Route::get('/test/something', 'RecordController@search')->name('record.search');
 
 Route::get('/races', 'RaceController@index')->name('race.index');
-
-// TODO: Finish race routes
-// Route::get('/race/{race}', 'RaceController@show')->name('race.show');
+Route::get('/race/{race}', 'RaceController@show')->name('race.show');
 
 // Admin Routes
 Route::group(['middleware' => ['auth', 'web']], function () {
@@ -73,6 +71,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 		Route::delete('admin/record/{record}/delete', 'RecordController@delete')->name('delete');
 	});
 
+	// TODO: Race CRUD
 	// Race Routes
 	// Route::group(['as' => 'race.'], function() {
 	// 	Route::get('admin/race/create', 'RaceController@create')->name('create');

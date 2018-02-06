@@ -9,126 +9,139 @@ use Illuminate\Support\Facades\Log;
 class RaceController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     * 
-     * @param  \App\Models\Race $race
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Race $race)
-    {
-        $viewParams = [
-            'races' => Race::all()
-        ];
+	/**
+	 * Display a listing of the resource.
+	 * 
+	 * @param  \App\Models\Race $race
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Race $race)
+	{
+		$viewParams = [
+			'races' => Race::all()
+		];
 
-        return view('race.index', $viewParams);
-    }
+		return view('race.index', $viewParams);
+	}
 
-    /**
-     * Create a new resource.
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $race = new Race();
+	/**
+	 * Create a new resource.
+	 * 
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		$race = new Race();
 
-        $viewParams = [
-            'race' => $race
-        ];
+		$viewParams = [
+			'race' => $race
+		];
 
-        return view('race.create', $viewParams);
-    }
+		return view('race.create', $viewParams);
+	}
 
-    /**
-     * Show a specific resource.
-     *
-     * @param  \App\Models\Race
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Race $race)
-    {
-        
-    }
+	/**
+	 * Show a specific resource.
+	 *
+	 * @param  \App\Models\Race
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(Race $race)
+	{
+		$race = Race::find($race->id);
 
-    /**
-     * Update a resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Race
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Record $record)
-    {
-        $race = Race::find($race->id);
+		if (!$race) {
+			// throw race doesn't exist
+		}
 
-        if (!$race) {
-            // throw err
-        }
+		$characters = $race->characters;
 
-        $race->name = $request->input('name');
-        $race->health_bonus = $request->input('health_bonus');
-        $race->save();
+		$viewParams = [
+			'race' => $race,
+			'characters' => $characters
+		];
 
-        return redirect()->route('race.index')
-        ->with('message', 'Race updated');
-    }
+		return view('race.show', $viewParams);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function save(Request $request)
-    {
-        $race = new Race;
-        $race->name = $request->input('name');
-        $race->health_bonus = $request->input('health_bonus');
-        $race->save();
+	/**
+	 * Update a resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Models\Race
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Record $record)
+	{
+		$race = Race::find($race->id);
 
-        return redirect()->route('race.index')
-        ->with('message', 'Race created');
-    }
+		if (!$race) {
+			// throw err
+		}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Race
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Race $race)
-    {
-        if ($race) {
-            $race = Race::find($race->id);
-        }
+		$race->name = $request->input('name');
+		$race->health_bonus = $request->input('health_bonus');
+		$race->save();
 
-        $viewParams = [
-            'race' => $race
-        ];
+		return redirect()->route('race.index')
+		->with('message', 'Race updated');
+	}
 
-        return view('race.edit', $viewParams);
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function save(Request $request)
+	{
+		$race = new Race;
+		$race->name = $request->input('name');
+		$race->health_bonus = $request->input('health_bonus');
+		$race->save();
 
-    /**
-     * Remove the specified resource from storage.
-     * 
-     * @param  \App\Models\Race
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(Race $race)
-    {
-        Log::info('Checking for race with ID:'.$race->id);
-        $race = Record::find($record->id);
+		return redirect()->route('race.index')
+		->with('message', 'Race created');
+	}
 
-        if (!$race) {
-            // throw race doesn't exist
-        }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\Models\Race
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit(Race $race)
+	{
+		if ($race) {
+			$race = Race::find($race->id);
+		}
 
-        $race->delete();
-        Log::alert('race '.$race->id.' deleted');
+		$viewParams = [
+			'race' => $race
+		];
 
-        return redirect()->route('race.index')
-        ->with('message', 'Race deleted');
-    }
+		return view('race.edit', $viewParams);
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 * 
+	 * @param  \App\Models\Race
+	 * @return \Illuminate\Http\Response
+	 */
+	public function delete(Race $race)
+	{
+		Log::info('Checking for race with ID:'.$race->id);
+		$race = Record::find($record->id);
+
+		if (!$race) {
+			// throw race doesn't exist
+		}
+
+		$race->delete();
+		Log::alert('race '.$race->id.' deleted');
+
+		return redirect()->route('race.index')
+		->with('message', 'Race deleted');
+	}
 }

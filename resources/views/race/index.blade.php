@@ -17,7 +17,7 @@
 					<div class="col-md-6">
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<h3>{{ $race->name }}</h3>
+								<a href="{{ route('race.show', $race->id )}}"><h3>{{ $race->name }}</h3></a>
 								<div class="row">							
 									<ul class="list-inline">
 										<div class="col-md-6">
@@ -50,7 +50,7 @@
 								<div class="row">
 									@if($race->characters->count() > 0)
 									<div class="col-md-12">
-										<p>Their most experience character is:
+										<p>Their most experienced character is:
 										<a href="{{ route('character.show', $race->characters->sortByDesc('experience')->first()->id ) }}"> {{ $race->characters->sortByDesc('experience')->first()->name }}</a></p>
 										</p>
 									</div>
