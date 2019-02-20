@@ -1,0 +1,55 @@
+version: '3'
+
+volumes:
+
+  mysqldata:
+    driver: "local"
+  redisdata:
+    driver: "local"
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: laravel-docker
+    ports:
+      - 8080:80
+    volumes:
+      - .:/srv/www/charlog
+    links:
+      - mariadb
+      - redis
+    depends_on:
+      - redis
+      - mariadb
+    environment:
+      DB_HOST: mariadb
+      DB_DATABASE: homestead
+      DB_USERNAME: homestead
+      DB_PASSWORD: secret
+      REDIS_HOST: redis
+      SESSION_DRIVER: redis
+      CACHE_DRIVER: redis
+
+  mariadb:
+    image: mariadb:10.4
+    restart: always
+    ports:
+      - 3306:3306
+    container_name: db
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+  redis:
+    image: redis:5.0.3-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redisdata:/data
